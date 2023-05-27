@@ -1,0 +1,1 @@
+(()=>{var o,d;[].push(o="Boots"),d="Added item: "+o,console.log(d)})();
