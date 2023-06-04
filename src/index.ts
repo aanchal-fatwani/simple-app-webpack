@@ -1,6 +1,6 @@
-const util = require('./utils');
+import { log } from './utils';
 
-const cart = [];
+const cart:any = [];
 
 // function log(msg) {
 //     console.log(msg);
@@ -8,12 +8,12 @@ const cart = [];
 
 function addToCart(item) {
     cart.push(item);
-    util.log("Added item: " + item);
+    log("Added item: " + item);
 }
 
 function removeFromCart(id) {
     cart.splice(id);
-    util.log("Removed: " + id);
+    log("Removed: " + id);
 }
 
 addToCart("Boots");

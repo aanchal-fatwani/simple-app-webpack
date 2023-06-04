@@ -2,7 +2,7 @@
   "name": "simple-app-webpack",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index",
   "scripts": {
     "start": "webpack serve",
     "build": "set NODE_ENV=production&&webpack",
@@ -25,5 +25,9 @@
     "webpack": "^5.84.1",
     "webpack-cli": "^5.1.1",
     "webpack-dev-server": "^4.15.0"
+  },
+  "dependencies": {
+    "ts-loader": "^9.4.3",
+    "typescript": "^5.1.3"
   }
 }

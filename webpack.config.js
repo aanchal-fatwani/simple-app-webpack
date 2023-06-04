@@ -3,24 +3,32 @@ const path = require("path");
 const isProduction = process.env.NODE_ENV === "production";
 
 let config = {
-  entry: ["./src/index.js", "./src/home.js"],
+  entry: ["./src/index", "./src/home"],
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
   },
   module: {
     rules: [
+      // {
+      //   test: /\.js/,
+      //   exclude: /node_modules/,
+      //   use: {
+      //     loader: "babel-loader",
+      //     options: {
+      //       presets: ["@babel/preset-env"],
+      //     }
+      //   }
+      // },
       {
-        test: /\.js/,
+        test: /\.ts/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"],
-          } 
-        }
-      }
-    ]
+        use: "ts-loader",
+      },
+    ],
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
   },
   devtool: "inline-source-map",
   mode: "development",
