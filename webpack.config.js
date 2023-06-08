@@ -1,4 +1,5 @@
 const path = require("path");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -9,6 +10,12 @@ let config = {
     filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './index.html', // used to incorporate build created by js
+      clean: true // checks for output files in dist and deletes any extra from prev. build
+    })
+  ],
   module: {
     rules: [
       // {
@@ -44,3 +51,4 @@ if (isProduction) {
 }
 
 module.exports = config;
+
