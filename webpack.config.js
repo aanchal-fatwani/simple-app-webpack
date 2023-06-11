@@ -42,7 +42,10 @@ let config = {
   devtool: "inline-source-map",
   mode: "development",
   devServer: {
+    // liveReload: false, // to disable liveServer
     static: "./dist",
+    watchFiles: ["src/**/*", "index.html"] // if these files changes devServer will refresh browser
+    // still on every save build is done, it just not refreshes the browser everytime, if watchFiles present 
   },
 };
 
