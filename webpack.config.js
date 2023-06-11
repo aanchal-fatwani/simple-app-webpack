@@ -4,10 +4,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const isProduction = process.env.NODE_ENV === "production";
 
 let config = {
-  // entry: ["./src/index", "./src/home"],
-  entry: { index: "./src/index", home: "./src/home" },
+  entry: ["./src/index", "./src/home"],
+  // entry: { index: "./src/index", home: "./src/home" },
   output: {
-    filename: "[name].js",
+    filename: "main.js",
+    // filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
   },
   plugins: [
