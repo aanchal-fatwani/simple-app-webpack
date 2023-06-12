@@ -1,4 +1,5 @@
 import { log } from './utils';
+import "./css/main.css";
 
 const cart:any = [];
 
