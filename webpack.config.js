@@ -43,16 +43,16 @@ let config = {
         exclude: /node_modules/,
         use: [
           //Using MiniCssExtract loader gives separate file as opposed to style loader putting css in js bundle
-          MiniCssExtractPlugin.loader, 
-          // "style-loader",
+          // MiniCssExtractPlugin.loader, 
+          "style-loader",
           "css-loader"]
       },
       {
         test: /\.scss/,
         exclude: /node_modules/,
         use: [
-          MiniCssExtractPlugin.loader,
-          // "style-loader",
+          // MiniCssExtractPlugin.loader,
+          "style-loader",
           "css-loader", "sass-loader"]
       },
     ],
