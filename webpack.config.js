@@ -11,11 +11,11 @@ let config = {
     filename: "main.js",
     // filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
+    clean: true // checks for output files in dist and deletes any extra from prev. build
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './index.html', // used to incorporate build created by js
-      clean: true // checks for output files in dist and deletes any extra from prev. build
     }),
     new MiniCssExtractPlugin({
       filename: "bundle.css" // to change the filename
