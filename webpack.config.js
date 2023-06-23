@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -15,7 +16,8 @@ let config = {
     new HtmlWebpackPlugin({
       template: './index.html', // used to incorporate build created by js
       clean: true // checks for output files in dist and deletes any extra from prev. build
-    })
+    }),
+    new MiniCssExtractPlugin(),
   ],
   module: {
     rules: [
@@ -37,12 +39,19 @@ let config = {
       {
         test: /\.css/,
         exclude: /node_modules/,
-        use: ["style-loader", "css-loader"]
+        use: [
+          //Using MiniCssExtract loader gives separate file as opposed to style loader putting css in js bundle
+          MiniCssExtractPlugin.loader, 
+          // "style-loader",
+          "css-loader"]
       },
       {
         test: /\.scss/,
         exclude: /node_modules/,
-        use: ["style-loader", "css-loader", "sass-loader"]
+        use: [
+          MiniCssExtractPlugin.loader,
+          // "style-loader",
+          "css-loader", "sass-loader"]
       },
     ],
   },
