@@ -53,7 +53,18 @@ let config = {
         use: [
           // MiniCssExtractPlugin.loader,
           "style-loader",
-          "css-loader", "sass-loader"]
+          "css-loader",
+          {
+            loader: "postcss-loader", // postcss added after css
+            options: {
+              postcssOptions: {
+                plugins: [
+                  ["postcss-preset-env", {}]
+                ]
+              }
+            }
+          },
+          "sass-loader"]
       },
     ],
   },
