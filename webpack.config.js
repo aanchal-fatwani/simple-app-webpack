@@ -1,6 +1,7 @@
 const path = require("path");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -11,14 +12,22 @@ let config = {
     filename: "main.js",
     // filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
-    clean: true // checks for output files in dist and deletes any extra from prev. build
+    clean: true, // checks for output files in dist and deletes any extra from prev. build
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './index.html', // used to incorporate build created by js
+      template: "./index.html", // used to incorporate build created by js
     }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: "./images",
+          to: "images",
+        },
+      ],
+    }), 
     new MiniCssExtractPlugin({
-      filename: "bundle.css" // to change the filename
+      filename: "bundle.css", // to change the filename
     }),
   ],
   module: {
@@ -43,9 +52,10 @@ let config = {
         exclude: /node_modules/,
         use: [
           //Using MiniCssExtract loader gives separate file as opposed to style loader putting css in js bundle
-          // MiniCssExtractPlugin.loader, 
+          // MiniCssExtractPlugin.loader,
           "style-loader",
-          "css-loader"]
+          "css-loader",
+        ],
       },
       {
         test: /\.scss/,
@@ -58,13 +68,12 @@ let config = {
             loader: "postcss-loader", // postcss added after css
             options: {
               postcssOptions: {
-                plugins: [
-                  ["postcss-preset-env", {}]
-                ]
-              }
-            }
+                plugins: [["postcss-preset-env", {}]],
+              },
+            },
           },
-          "sass-loader"]
+          "sass-loader",
+        ],
       },
     ],
   },
@@ -76,8 +85,8 @@ let config = {
   devServer: {
     // liveReload: false, // to disable liveServer
     static: "./dist",
-    watchFiles: ["src/**/*", "index.html"] // if these files changes devServer will refresh browser
-    // still on every save build is done, it just not refreshes the browser everytime, if watchFiles present 
+    watchFiles: ["src/**/*", "index.html"], // if these files changes devServer will refresh browser
+    // still on every save build is done, it just not refreshes the browser everytime, if watchFiles present
   },
 };
 
@@ -87,4 +96,3 @@ if (isProduction) {
 }
 
 module.exports = config;
-
