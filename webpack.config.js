@@ -18,14 +18,14 @@ let config = {
     new HtmlWebpackPlugin({
       template: "./index.html", // used to incorporate build created by js
     }),
-    new CopyPlugin({
-      patterns: [
-        {
-          from: "./images",
-          to: "images",
-        },
-      ],
-    }), 
+    // new CopyPlugin({
+    //   patterns: [
+    //     {
+    //       from: "./images",
+    //       to: "images",
+    //     },
+    //   ],
+    // }), 
     new MiniCssExtractPlugin({
       filename: "bundle.css", // to change the filename
     }),
@@ -46,6 +46,13 @@ let config = {
         test: /\.ts/,
         exclude: /node_modules/,
         use: "ts-loader",
+      },
+      {
+        test: /\.(png|jpg)$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "images/[name][ext]"
+        }
       },
       {
         test: /\.txt/,
