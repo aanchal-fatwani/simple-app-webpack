@@ -48,10 +48,15 @@ let config = {
         use: "ts-loader",
       },
       {
+        test: /\.html/,
+        exclude: /node_modules/,
+        use: "html-loader",
+      },
+      {
         test: /\.(png|jpg)$/i,
         type: "asset/resource",
         generator: {
-          filename: "images/[name][ext]"
+          filename: "images/[hash][name][ext]"
         }
       },
       {
