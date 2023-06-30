@@ -54,11 +54,15 @@ let config = {
       },
       {
         test: /\.(png|jpg)$/i,
-        type: "asset/resource",
-        generator: {
-          filename: "images/[hash][name][ext]"
-        }
+        type: "asset/inline",
       },
+      // {
+      //   test: /\.(png|jpg)$/i,
+      //   type: "asset/resource",
+      //   generator: {
+      //     filename: "images/[hash][name][ext]"
+      //   }
+      // },
       {
         test: /\.txt/,
         type: "asset/source"
