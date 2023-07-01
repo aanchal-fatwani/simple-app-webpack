@@ -56,9 +56,21 @@ let config = {
       //   test: /\.(png|jpg)$/i,
       //   type: "asset/inline",
       // },
+      // {
+      //   test: /\.(png|jpg)$/i,
+      //   type: "asset/resource",
+      //   generator: {
+      //     filename: "images/[hash][name][ext]"
+      //   }
+      // },
       {
         test: /\.(png|jpg)$/i,
-        type: "asset/resource",
+        type: "asset", // for both inline and resources
+        parser: {
+          dataUrlCondition: {
+            maxSize: 20 * 1024 //Only imgs below 20kb would be inlined
+          }
+        },
         generator: {
           filename: "images/[hash][name][ext]"
         }
