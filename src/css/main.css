@@ -1,3 +1,6 @@
 .test {
     color: "blue"
 }
+.bgImg {
+    background-image: url('../images/img1.png');
+}
