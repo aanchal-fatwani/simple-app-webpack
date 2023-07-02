@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -29,6 +30,7 @@ let config = {
     new MiniCssExtractPlugin({
       filename: "bundle.css", // to change the filename
     }),
+    new BundleAnalyzerPlugin()
   ],
   module: {
     rules: [
