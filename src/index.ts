@@ -18,5 +18,13 @@ function removeFromCart(id) {
     log("Removed: " + id);
 }
 
+function getData(){
+    fetch('/api/todos/1')
+      .then(response => response.json())
+      .then(json => console.log(json))
+}
+
 addToCart("Boots");
 addToCart("Bags");
+
+getData();

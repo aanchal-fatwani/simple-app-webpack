@@ -2,7 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -26,11 +26,11 @@ let config = {
     //       to: "images",
     //     },
     //   ],
-    // }), 
+    // }),
     new MiniCssExtractPlugin({
       filename: "bundle.css", // to change the filename
     }),
-    new BundleAnalyzerPlugin()
+    // new BundleAnalyzerPlugin(), // for when we want to analyze our bundles through build
   ],
   module: {
     rules: [
@@ -41,8 +41,8 @@ let config = {
           loader: "babel-loader",
           options: {
             presets: ["@babel/preset-env"],
-          }
-        }
+          },
+        },
       },
       {
         test: /\.ts/,
@@ -70,16 +70,16 @@ let config = {
         type: "asset", // for both inline and resources
         parser: {
           dataUrlCondition: {
-            maxSize: 20 * 1024 //Only imgs below 20kb would be inlined
-          }
+            maxSize: 20 * 1024, //Only imgs below 20kb would be inlined
+          },
         },
         generator: {
-          filename: "images/[hash][name][ext]"
-        }
+          filename: "images/[hash][name][ext]",
+        },
       },
       {
         test: /\.txt/,
-        type: "asset/source"
+        type: "asset/source",
       },
       {
         test: /\.css/,
@@ -121,6 +121,14 @@ let config = {
     static: "./dist",
     watchFiles: ["src/**/*", "index.html"], // if these files changes devServer will refresh browser
     // still on every save build is done, it just not refreshes the browser everytime, if watchFiles present
+    proxy: {
+      "/api": {
+        target: "http://jsonplaceholder.typicode.com", // Added for reference purposes; Gives 'Direct IP access not allowed' error
+        pathRewrite: {
+          "^/api": "",
+        },
+      },
+    },
   },
 };
 
