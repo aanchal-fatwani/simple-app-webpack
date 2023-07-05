@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 // const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const HelloWorldPlugin = require("./hw-plugin/index");
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -19,6 +20,7 @@ let config = {
     new HtmlWebpackPlugin({
       template: "./index.html", // used to incorporate build created by js
     }),
+    new HelloWorldPlugin(),
     // new CopyPlugin({
     //   patterns: [
     //     {
@@ -47,7 +49,9 @@ let config = {
       {
         test: /\.ts/,
         exclude: /node_modules/,
-        use: ["ts-loader", path.resolve("./gen-loader/index.js")],
+        use: ["ts-loader",
+          // path.resolve("./gen-loader/index.js")
+        ],
       },
       {
         test: /\.html/,
